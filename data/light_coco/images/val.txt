@@ -1,0 +1,4 @@
+./train/011.jpg
+./train/1013.jpg
+./train/010.jpg
+./train/1005.jpg
