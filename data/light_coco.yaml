@@ -7,6 +7,9 @@ test: ./data/light_coco/images/test.txt  # 20k images for submission to https://
 nc: 82
 
 # class names
+
+# names: ['small','tall']
+
 names: ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', 'truck', 'boat', 'traffic light',
         'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird', 'cat', 'dog', 'horse', 'sheep', 'cow',
         'elephant', 'bear', 'zebra', 'giraffe', 'backpack', 'umbrella', 'handbag', 'tie', 'suitcase', 'frisbee',
