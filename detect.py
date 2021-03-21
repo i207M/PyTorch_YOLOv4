@@ -30,7 +30,7 @@ def load_classes(path):
 def detect(save_img=False):
     out, source, weights, view_img, save_txt, imgsz, cfg, names = \
         opt.output, opt.source, opt.weights, opt.view_img, opt.save_txt, opt.img_size, opt.cfg, opt.names
-    webcam = source == '0' or source.startswith('rtsp') or source.startswith('http') or source.endswith('.txt')
+    webcam = source == '0' or source.startswith('rtsp') or source.startswith('http') # or source.endswith('.txt')
 
     # Initialize
     device = select_device(opt.device)

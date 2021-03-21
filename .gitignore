@@ -5,3 +5,4 @@ pth/*
 runs
 weights
 runs_old
+*.MOV

@@ -79,6 +79,10 @@ class LoadImages:  # for inference
             files = sorted(glob.glob(p))  # glob
         elif os.path.isdir(p):
             files = sorted(glob.glob(os.path.join(p, '*.*')))  # dir
+        # edited
+        elif p.endswith('.txt'):
+            with open(p, 'r') as f:
+                files = [x.strip() for x in f.read().splitlines() if len(x.strip())]
         elif os.path.isfile(p):
             files = [p]  # files
         else:
