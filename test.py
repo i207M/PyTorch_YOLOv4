@@ -232,10 +232,20 @@ def test(data,
 
     # Save JSON
     if save_json and len(jdict):
-        f = 'detections_val2017_%s_results.json' % \
+        fjson = 'detections_val2017_%s_results.json' % \
             (weights.split(os.sep)[-1].replace('.pt', '') if isinstance(weights, str) else '')  # filename
         print('\nCOCO mAP with pycocotools... saving %s...' % f)
-        with open(f, 'w') as file:
+
+        with open('data/light_coco/annotations/instances_val2017.json', 'r') as f:
+            images = json.loads(f.read())['images']
+        ying = {}
+        for img in images:
+            ying[int(img['file_name'].split('.')[0])] = img['id']
+        # print(ying)
+        for d in jdict:
+            d['image_id'] = ying[d['image_id']]
+
+        with open(fjson, 'w') as file:
             json.dump(jdict, file)
 
         try:  # https://github.com/cocodataset/cocoapi/blob/master/PythonAPI/pycocoEvalDemo.ipynb
@@ -244,7 +254,7 @@ def test(data,
 
             imgIds = [int(Path(x).stem) for x in dataloader.dataset.img_files]
             cocoGt = COCO(glob.glob('data/light_coco/annotations/instances_val*.json')[0])  # initialize COCO ground truth api
-            cocoDt = cocoGt.loadRes(f)  # initialize COCO pred api
+            cocoDt = cocoGt.loadRes(fjson)  # initialize COCO pred api
             cocoEval = COCOeval(cocoGt, cocoDt, 'bbox')
             cocoEval.params.imgIds = imgIds  # image IDs to evaluate
             cocoEval.evaluate()
