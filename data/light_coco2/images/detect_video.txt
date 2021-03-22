@@ -1,0 +1,2 @@
+data/light_coco2/images/IMG_0043.MOV
+data/light_coco2/images/IMG_0044.MOV
