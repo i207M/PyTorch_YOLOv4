@@ -6,3 +6,4 @@ runs
 weights
 runs_old
 *.MOV
+mish-cuda/
