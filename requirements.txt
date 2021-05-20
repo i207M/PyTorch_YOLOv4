@@ -7,3 +7,6 @@ pycocotools
 tqdm
 pillow
 tensorboard >= 1.14
+
+pyyaml
+scipy

@@ -1,1 +1,1 @@
-data/light_coco/images/train2017/1008.jpg
+data/light_coco/images/train2017/004.jpg
