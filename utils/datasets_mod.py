@@ -139,9 +139,10 @@ class LoadImages:  # for inference
     def __next__(self):
         # if self.count == self.nf:
         #     raise StopIteration
-        
+        print(f'Waiting on {ADDRESS}')
         msg, _ = self.sock.recvfrom(1024)
-        path = str(msg)
+        path = str(msg, encoding='utf-8')
+        print(f'{ADDRESS} got: {path}')
 
         # Read image
         self.count += 1

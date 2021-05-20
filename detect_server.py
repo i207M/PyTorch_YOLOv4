@@ -20,7 +20,7 @@ from utils.torch_utils import select_device, load_classifier, time_synchronized
 
 from models.models import *
 from models.experimental import *
-from utils.datasets import *
+from utils.datasets_mod import *
 from utils.general import *
 
 
