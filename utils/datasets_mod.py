@@ -142,7 +142,7 @@ class LoadImages:  # for inference
         print(f'Waiting on {ADDRESS}')
         msg, _ = self.sock.recvfrom(1024)
         path = str(msg, encoding='utf-8')
-        print(f'{ADDRESS} got: {path}')
+        print(f'YOLOv4 {ADDRESS} got: {path}')
 
         # Read image
         self.count += 1

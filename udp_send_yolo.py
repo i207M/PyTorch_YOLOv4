@@ -3,9 +3,9 @@ from socket import socket, AF_INET, SOCK_DGRAM
 
 def send_img(address):
     sock = socket(AF_INET, SOCK_DGRAM)
-    FILE_NAME = b'temp_input.jpg'
-    sock.sendto(FILE_NAME, address)
-    print(f'Sent {str(FILE_NAME, encoding = "utf-8")}')
+    FILE_NAME = 'temp_input.jpg'
+    sock.sendto(bytes(FILE_NAME, encoding='utf8'), address)
+    print(f'Sent {FILE_NAME} to {address}')
 
 
 if __name__ == '__main__':
