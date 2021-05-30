@@ -97,37 +97,37 @@ ADDRESS = ('127.0.0.1', 9876)
 
 
 class LoadImages:  # for inference
-    def __init__(self, path, img_size=640):
-        p = str(Path(path))  # os-agnostic
-        p = os.path.abspath(p)  # absolute path
-        if '*' in p:
-            files = sorted(glob.glob(p))  # glob
-        elif os.path.isdir(p):
-            files = sorted(glob.glob(os.path.join(p, '*.*')))  # dir
-        # edited
-        elif p.endswith('.txt'):
-            with open(p, 'r') as f:
-                files = [x.strip() for x in f.read().splitlines() if len(x.strip())]
-        elif os.path.isfile(p):
-            files = [p]  # files
-        else:
-            raise Exception('ERROR: %s does not exist' % p)
+    def __init__(self, img_size=640):
+        # p = str(Path(path))  # os-agnostic
+        # p = os.path.abspath(p)  # absolute path
+        # if '*' in p:
+        #     files = sorted(glob.glob(p))  # glob
+        # elif os.path.isdir(p):
+        #     files = sorted(glob.glob(os.path.join(p, '*.*')))  # dir
+        # # edited
+        # elif p.endswith('.txt'):
+        #     with open(p, 'r') as f:
+        #         files = [x.strip() for x in f.read().splitlines() if len(x.strip())]
+        # elif os.path.isfile(p):
+        #     files = [p]  # files
+        # else:
+        #     raise Exception('ERROR: %s does not exist' % p)
 
-        images = [x for x in files if os.path.splitext(x)[-1].lower() in img_formats]
-        videos = [x for x in files if os.path.splitext(x)[-1].lower() in vid_formats]
-        ni, nv = len(images), len(videos)
+        # images = [x for x in files if os.path.splitext(x)[-1].lower() in img_formats]
+        # videos = [x for x in files if os.path.splitext(x)[-1].lower() in vid_formats]
+        # ni, nv = len(images), len(videos)
 
         self.img_size = img_size
-        self.files = images + videos
-        self.nf = ni + nv  # number of files
-        self.video_flag = [False] * ni + [True] * nv
+        # self.files = images + videos
+        self.nf = 1  # ni + nv  # number of files
+        # self.video_flag = [False] * ni + [True] * nv
         self.mode = 'images'
-        if any(videos):
-            self.new_video(videos[0])  # new video
-        else:
-            self.cap = None
-        assert self.nf > 0, 'No images or videos found in %s. Supported formats are:\nimages: %s\nvideos: %s' % \
-                            (p, img_formats, vid_formats)
+        # if any(videos):
+        #     self.new_video(videos[0])  # new video
+        # else:
+        #     self.cap = None
+        # assert self.nf > 0, 'No images or videos found in %s. Supported formats are:\nimages: %s\nvideos: %s' % \
+        #                     (p, img_formats, vid_formats)
 
         self.sock = socket(AF_INET, SOCK_DGRAM)
         self.sock.bind(ADDRESS)
@@ -158,7 +158,7 @@ class LoadImages:  # for inference
         img = np.ascontiguousarray(img)
 
         # cv2.imwrite(path + '.letterbox.jpg', 255 * img.transpose((1, 2, 0))[:, :, ::-1])  # save letterbox image
-        return path, img, img0, self.cap
+        return path, img, img0, None
 
     def new_video(self, path):
         self.frame = 0

@@ -51,8 +51,8 @@ def detect(save_img=False):
         model.load_state_dict(torch.load(weights[0], map_location=device)['model'])
     except:
         load_darknet_weights(model, weights[0])
-    #model = attempt_load(weights, map_location=device)  # load FP32 model
-    #imgsz = check_img_size(imgsz, s=model.stride.max())  # check img_size
+    # model = attempt_load(weights, map_location=device)  # load FP32 model
+    # imgsz = check_img_size(imgsz, s=model.stride.max())  # check img_size
     model.to(device).eval()
     if half:
         model.half()  # to FP16
@@ -74,7 +74,7 @@ def detect(save_img=False):
         dataset = LoadStreams(source, img_size=imgsz)
     else:
         save_img = True
-        dataset = LoadImages(source, img_size=imgsz)
+        dataset = LoadImages(img_size=imgsz)
 
     # Get names and colors
     names = load_classes(names)
@@ -177,9 +177,7 @@ def detect(save_img=False):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights', nargs='+', type=str, default='yolov4.pt', help='model.pt path(s)')
-    parser.add_argument(
-        '--source', type=str, default='inference/images', help='source'
-    )  # file/folder, 0 for webcam
+    parser.add_argument('--source', type=str, default='null', help='source')  # file/folder, 0 for webcam
     parser.add_argument(
         '--output', type=str, default='inference/output', help='output folder'
     )  # output folder
