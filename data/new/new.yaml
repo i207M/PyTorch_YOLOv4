@@ -1,0 +1,8 @@
+# train and val datasets (image directory or *.txt file with image paths)
+train: ./data/new/images
+val: ./data/new/images
+test: ./data/new/images
+
+# number of classes
+nc: 18
+names: ['显示器1', '显示器2', '显示器3', '定位器1', '定位器2', '电视', '显示器4', '显示器5', '红外摄像头', '坐灯', '枕头', '桌子', '墙', '椅子', '箱子', '窗户', '灯', '空调']
