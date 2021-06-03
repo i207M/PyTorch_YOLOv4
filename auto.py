@@ -34,7 +34,7 @@ def make_cfg(name: str, target: str, n_class: int) -> None:
 
 
 def make_sh(name: str, target: str) -> None:
-    sh_path = os.path.join(target, name + '_train.sh')
+    sh_path = os.path.join(target, 'train_' + name + '.sh')
     with open(sh_path, 'w') as f:
         f.write('source /home/dlenv/anaconda3/bin/activate\n')
         f.write('conda activate yolo-fix\n')
