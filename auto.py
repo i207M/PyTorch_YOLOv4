@@ -55,17 +55,19 @@ def make_label(target: str, instance_json) -> None:
     for dat in instance_json['images']:
         id = dat['id']
         label_dict[id] = []
-        imgid_to_data[id] = {'name': dat['file_name'], 'w': dat['width'], 'h': dat['height']}
+        imgid_to_data[id] = {'name': dat['file_name'], 'w_h': (dat['width'], dat['height'])}
     for dat in instance_json['annotations']:
         # WARNING: MINUS 1
         imgid = dat['image_id']
-        hw = imgid_to_data[imgid]
+        w, h = imgid_to_data[imgid]['w_h']
         category_id = dat['category_id'] - 1
-        bbox = dat['bbox']
-        nom_center_x = (bbox[0] + bbox[2] / 2) / hw['h']
-        nom_center_y = (bbox[1] + bbox[3] / 2) / hw['w']
-        nom_w = bbox[2] / hw['w']
-        nom_h = bbox[3] / hw['h']
+        bbox = dat['bbox']  # x, y, w, h
+        nom_center_x = (bbox[0] + bbox[2] / 2) / w
+        nom_center_y = (bbox[1] + bbox[3] / 2) / h
+        nom_w = bbox[2] / w
+        nom_h = bbox[3] / h
+        assert (nom_center_x < 1 and nom_center_y < 1)
+        assert (nom_w < 1 and nom_h < 1)
         label_dict[imgid].append(f'{category_id} {nom_center_x} {nom_center_y} {nom_w} {nom_h}\n')
 
     for id, labels in label_dict.items():
@@ -81,6 +83,7 @@ def gen(name: str, dir: str, target: str) -> None:
     make_label(target, instance_json)
     make_cfg(name, target, len(instance_json['categories']))
     make_sh(name, target)
+    shutil.copy('./data/tensorboard.sh', os.path.join(target, 'tensorboard.sh'))
 
 
 if __name__ == '__main__':
