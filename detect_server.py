@@ -117,6 +117,9 @@ def detect(save_img=False):
                            ) + ('_%g' % dataset.frame if dataset.mode == 'video' else '')
             s += '%gx%g ' % img.shape[2:]  # print string
             gn = torch.tensor(im0.shape)[[1, 0, 1, 0]]  # normalization gain whwh
+
+            pred = []
+
             if det is not None and len(det):
                 # Rescale boxes from img_size to im0 size
                 det[:, :4] = scale_coords(img.shape[2:], det[:, :4], im0.shape).round()
@@ -131,14 +134,14 @@ def detect(save_img=False):
                     if save_txt:  # Write to file
                         xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) /
                                 gn).view(-1).tolist()  # normalized xywh
-                        print("txt_path: ",txt_path)
-                        with open(txt_path + '.txt', 'a') as f:
-                            f.write(('%g ' * 5 + '\n') % (cls, *xywh))  # label format
+                        pred.append(('%g ' * 5 + '\n') % (cls, *xywh))
 
                     if save_img or view_img:  # Add bbox to image
                         label = '%s %.2f' % (names[int(cls)], conf)
                         plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=3)
 
+            with open(txt_path + '.txt', 'a') as f:
+                f.write(''.join(pred))  # label format
             # Print time (inference + NMS)
             print('%sDone. (%.3fs)' % (s, t2 - t1))
 
