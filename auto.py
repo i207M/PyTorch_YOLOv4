@@ -16,6 +16,10 @@ def make_yaml(name: str, dir: str, target: str):
     yaml = yaml.replace('/*NAMES*/', str(names))
     yaml = yaml.replace('/*TRAIN*/', os.path.join(target, 'images'))
 
+    # generate names
+    with open(os.path.join(target, 'names'), 'w') as f:
+        f.write('\n'.join(names))
+
     open(os.path.join(target, name + '.yaml'), 'w').write(yaml)
 
     return instance_json
@@ -87,7 +91,8 @@ def gen(name: str, dir: str, target: str) -> None:
 
 
 if __name__ == '__main__':
-    dir = './download/new'  # input('Input data directory')
+    dir = input('Input data directory:\n')
+    # dir = './download/new'
     name = os.path.basename(dir)
     target = os.path.join(DATA_DIR, name)
     gen(name, dir, target)
