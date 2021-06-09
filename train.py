@@ -521,6 +521,7 @@ if __name__ == '__main__':
             )
             tb_writer = SummaryWriter(
                 log_dir=increment_dir(Path(opt.logdir) / 'exp', opt.name)
+                # log_dir=Path(opt.logdir) / opt.name
             )  # runs/exp
 
         train(hyp, opt, device, tb_writer)

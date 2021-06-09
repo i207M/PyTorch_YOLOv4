@@ -1,0 +1,8 @@
+# train and val datasets (image directory or *.txt file with image paths)
+train: ./data/yolotest/images
+val: ./data/yolotest/images
+test: ./data/yolotest/images
+
+# number of classes
+nc: 2
+names: ['BlueTooth', '帽子']

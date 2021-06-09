@@ -47,7 +47,7 @@ def make_sh(name: str, target: str) -> None:
         f.write(
             f'python train.py --device=1 --name {name}_{time.strftime("%Y-%m-%d_%H-%M-%S", time.localtime())} '
             f'--data {os.path.join(target,name+".yaml")} --cfg {os.path.join(target,name+".cfg")} --weights pth/yolov4.weights '
-            f'--batch-size 16 --epochs 300 --img 640 640\n'
+            f'--batch-size 16 --epochs 300 --img-size 640 640\n'
         )
     os.chmod(sh_path, 0o777)
 
