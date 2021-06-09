@@ -8,3 +8,4 @@ runs_old
 *.MOV
 mish-cuda/
 *.swp
+download/

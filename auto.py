@@ -2,6 +2,7 @@ import os
 import shutil
 import time
 import json
+import sys
 
 DATA_DIR = './data'
 
@@ -91,7 +92,9 @@ def gen(name: str, dir: str, target: str) -> None:
 
 
 if __name__ == '__main__':
-    dir = input('Input data directory:\n')
+    assert(len(sys.argv)==2)
+    dir = os.path.abspath(sys.argv[1])
+    #dir = input('Input data directory:\n')
     # dir = './download/new'
     name = os.path.basename(dir)
     target = os.path.join(DATA_DIR, name)

@@ -1,1 +1,0 @@
-data/light_coco/images/train2017/004.jpg
